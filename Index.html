@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close-button">&times;</span>
+                <h2>Add a new book</h2>   
+            </div>
+            <div class="modal-body">
+                <form class='book-form' action="">
+                    <p>
+                        <label for="book-title">Title</label>
+                        <input name="book-title" id="book-title" type="text">
+                    </p>
+                    <p>
+                        <label for="book-author">Author</label>
+                        <input type="text" name="book-author" id="book-author">
+                    </p>
+                    <p>
+                        <label for="num-pages"># of pages</label>
+                        <input type="number" name="num-pages" id="num-pages">
+                    </p>
+                    <p>
+                        <label for="readSubmit">Read?</label>
+                        <select name="readSubmit" id="readSubmit">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </p>
+                    <button type="submit" class="submit-book">Submit</button>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+    <button type="button" class="new-book">New Book</button>
+    <div class="book-display">
+        
+        <template>
+            <div class="book" data-key="0">
+                <h2 class="title-display">The Great Gatsby</h2>
+                <p>by <span class="author-display">George R.R. Martin</span></p>
+                <p class="pages-display">500 pages</p>
+                <select name="read" id="read" class="read-display">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+        </template>
+        
+    </div>
+</body>
+</html>
