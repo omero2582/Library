@@ -8,7 +8,16 @@
 }
 
 body{
-    background-color:rosybrown
+    background-color:rosybrown;
+    
+}
+
+button.new-book{
+    font-size: 1.5rem;
+}
+
+button:hover{
+    cursor: pointer;
 }
 
 .modal{
@@ -36,6 +45,7 @@ body{
     width: 300px;
     position: relative;
     margin: auto;
+    padding-bottom: 16px;
 }
 
 .modal-content .modal-header{

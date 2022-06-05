@@ -29,19 +29,17 @@ function submitForm(e){
         obj[one.id] = one.value;
         return obj;
     }, new Book());
-    console.log(newBook);
+    // console.log(newBook);
     myLibrary.addToLibrary(newBook);
-
     closeModal();
-    // bookDisplay.appendChild(createBookDOM(newBook)); //TODO INMPORTANT
-    createAllBooks(); //TODO replacement
+    createAllBooks(); 
     bookForm.reset();       //IMPORTANT clears form
 }
 
 btnNewBook.addEventListener('click', openModal);
 window.addEventListener('click', checkTarget);
 btnClose.addEventListener('click', closeModal);
-btnSubmit.addEventListener('click', submitForm);
+bookForm.addEventListener('submit', submitForm);
 
 
 
@@ -84,7 +82,9 @@ function createBookDOM(book){
     let pageString = book['num-pages']  > 1 ? 'pages' : 'page';
     clone.querySelector('.pages-display').textContent = book['num-pages'] + ` ${pageString}`;
     clone.querySelector('.read-display').value = book['readSubmit'];
-    
+    let index =  myLibrary.allBooks.indexOf(book);
+    clone.querySelector('.book').setAttribute('data-key', index);
+    clone.querySelector('.delete-btn').addEventListener('click', ()=> deleteBtn(index));
     return clone;
 }
 
@@ -93,6 +93,7 @@ function createAllBooks(){
     myLibrary.allBooks.forEach( (book) =>{
         bookDisplay.appendChild(createBookDOM(book));
     });
+    console.log(myLibrary.allBooks);
 }
 
 
@@ -104,3 +105,24 @@ function createAllBooks(){
 
     /****** */
 
+
+
+/*TODO TODO */
+/**PROB use a book id, with id numbers just counting up, increasin by 1 
+ * Alternatively, use the array index, but these would have to be reassigned everytime a book is removed
+ * something like button.addEventListener( e=> {
+ *  e.parentNode.getAttribute['data-key'];
+ * });
+*
+*   it just confuses me cause of idk how this would affect a 'sort' feature
+*/
+
+function deleteBtn(index){
+    console.log(`deleted '${myLibrary.allBooks[index]['book-title']}'`);
+    myLibrary.removeBook(index);
+    createAllBooks();
+}
+
+function sortBy(){
+
+}

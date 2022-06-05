@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
-    <script src="script.js" defer></script>
+    <script src="script3.js" defer></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,7 +20,7 @@
                 <form class='book-form' action="">
                     <p>
                         <label for="book-title">Title</label>
-                        <input name="book-title" id="book-title" type="text">
+                        <input name="book-title" id="book-title" type="text" required>
                     </p>
                     <p>
                         <label for="book-author">Author</label>
@@ -31,8 +31,8 @@
                         <input type="number" name="num-pages" id="num-pages">
                     </p>
                     <p>
-                        <label for="readSubmit">Read?</label>
-                        <select name="readSubmit" id="readSubmit">
+                        <label for="read-status">Read?</label>
+                        <select name="read-status" id="read-status">
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>
@@ -55,6 +55,7 @@
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
                 </select>
+                <button type="button" class="delete-btn">Delete</button>
             </div>
         </template>
         
