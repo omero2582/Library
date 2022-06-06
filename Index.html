@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
     <div class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -43,15 +42,27 @@
             
         </div>
     </div>
-    <button type="button" class="new-book">New Book</button>
+    <div class="header">
+        <button type="button" class="new-book">New Book</button>
+        <select name="sort" id="sort">
+            <option value="Newest Added">Newest Added</option>
+            <option value="Oldest Added">Oldest Added</option>
+            <option value="Title A-Z">Title A-Z</option>
+            <option value="Title Z-A">Title Z-A</option>
+            <option value="Author A-Z">Author A-Z</option>
+            <option value="Author Z-A">Author Z-A</option>
+            <option value="Pages Descending">Pages Descending</option>
+            <option value="Pages Ascending">Pages Ascending</option>
+        </select>
+    </div>
     <div class="book-display">
         
         <template>
             <div class="book" data-key="0">
                 <h2 class="title-display">The Great Gatsby</h2>
-                <p>by <span class="author-display">George R.R. Martin</span></p>
+                <p class="author">by <span class="author-display">George R.R. Martin</span></p>
                 <p class="pages-display">500 pages</p>
-                <select name="read" id="read" class="read-display">
+                <select name="read-display" id="read-display">
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
                 </select>
