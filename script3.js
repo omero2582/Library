@@ -3,13 +3,11 @@
 let Library = (() =>{
     let allBooks = [];
     let bookId = 0; //counting up
-    let sortMethod;
 
     //cache
     const modal = document.querySelector('.modal');
     const btnNewBook = document.querySelector('.new-book');
     const btnClose = document.querySelector('.close-button');
-    const btnSubmit = document.querySelector('.submit-book');
     const bookForm = document.querySelector('.book-form');
     const template = document.querySelector('template');
     const bookDisplay = document.querySelector('.book-display');
@@ -20,56 +18,40 @@ let Library = (() =>{
     const pagesInput = document.querySelector('#num-pages');
     const readStatusInput = document.querySelector('#read-status');
     const sortInput = document.querySelector('#sort');
-    sortMethod = sortInput.value;
 
     //bind
-    btnNewBook.addEventListener('click', openModal);
-    window.addEventListener('click', checkTarget);
-    btnClose.addEventListener('click', closeModal);
-    bookForm.addEventListener('submit', submitForm);
-    sortInput.addEventListener('change', () =>{
-        sortMethod = sortInput.value;
-        renderAllBooks() });
+    btnNewBook.addEventListener('click', _openModal);
+    window.addEventListener('click', _checkTarget);
+    btnClose.addEventListener('click', _closeModal);
+    bookForm.addEventListener('submit', _submitForm);
+    sortInput.addEventListener('change', () => sortBy(sortInput.value));
 
     //modal
-    function openModal(e){
+    function _openModal(e){
         modal.style.display = 'initial';
     }
     
-    function closeModal(e){
+    function _closeModal(e){
         modal.style.display = 'none';
     }
     
-    function checkTarget(e){
+    function _checkTarget(e){
         if (e.target === modal){
-            closeModal(e);
+            _closeModal(e);
         }
     }
     
     //DOM
-    function submitForm(e){
+    function _submitForm(e){
         e.preventDefault();
         let newBook = Book(bookId, titleInput.value, authorInput.value, pagesInput.value, readStatusInput.value);
        
         addBook(newBook);
-        closeModal();
+        _closeModal();
         bookForm.reset();       //IMPORTANT clears form
     }
     
-
-    function addBook (newBook){
-        allBooks.push(newBook);
-        renderAllBooks();
-        bookId++;
-    }
-    
-    function deleteBook(index){
-        console.log(`deleted '${allBooks[index].getTitle()}'`);
-        allBooks.splice(index, 1);
-        renderAllBooks();
-    }
-
-    function renderBook(book){
+    function _renderBook(book){
         let clone = template.content.cloneNode(true);
         let pageString = book.getNumPages()  > 1 ? 'pages' : 'page';
         let readDisplay = clone.querySelector('#read-display');
@@ -85,14 +67,24 @@ let Library = (() =>{
         return clone;
     }
     
-    function renderAllBooks(){
-        sortBy(sortMethod);
+    function _renderAllBooks(){
         bookDisplay.innerHTML="";
-        allBooks.forEach( (book) =>{
-            bookDisplay.appendChild(renderBook(book));
-        });
+        allBooks.forEach( book => bookDisplay.appendChild(_renderBook(book)));
         logBooks();
     }
+
+    function addBook (newBook){
+        allBooks.push(newBook);
+        sortBy(sortInput.value);
+        bookId++;
+    }
+    
+    function deleteBook(index){
+        console.log(`deleted '${allBooks[index].getTitle()}'`);
+        allBooks.splice(index, 1);
+        sortBy(sortInput.value)
+    }
+
     
     function sortBy(method){
         switch(method){
@@ -121,16 +113,17 @@ let Library = (() =>{
                 allBooks.sort( (a,b) =>  a.getNumPages() - b.getNumPages());
                 break;
             default:
-                console.log(`sorting method '${sortMethod}' not supported`);
+                console.log(`sorting method '${method}' not supported`);
         }
-        console.log(`sorted by ${sortMethod}`);
+        _renderAllBooks();
+        console.log(`sorted by ${method}`);
     }
 
     function logBooks(){
         console.table(allBooks.map( one => one.toObj()));
     }
 
-    return {addBook, deleteBook, logBooks, allBooks, bookId, sortMethod}
+    return {addBook, deleteBook, logBooks, sortBy, allBooks, bookId}
 
 })();
 

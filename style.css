@@ -20,6 +20,15 @@ body{
 
 .header{
     padding: 0 150px;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: flex-start;
+    column-gap: 50px;
+    align-items: center;
+}
+
+.header select{
+    width: 180px;
 }
 
 button.new-book{
